@@ -129,6 +129,24 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    id: "treum-finance-content",
+    name: "TREUM Finance",
+    subtitle: "AI content generation platform for Indian Mutual Fund Distributors",
+    status: "archived",
+    confidence: 0.86,
+    confidenceLabel: "HIGH",
+    metrics: [
+      { value: "15,874", count: 15874, label: "lines of Python across 155 files (src/)", source: "wc -l on src/*.py" },
+      { value: "4 LLMs",  label: "OpenAI GPT-4-turbo (primary) + Claude + Gemini + Ollama (local fallback)" },
+      { value: "Hindi",   label: "MFD-specific templates with Indian currency formatting (lakh/crore), bilingual delivery" },
+      { value: "Multi-deploy", label: "Vercel + Render + Railway + macOS desktop installer (.app + DMG)" },
+    ],
+    blurb:
+      "AI content generation platform purpose-built for Indian Mutual Fund Distributors (MFDs). Multi-LLM routing across GPT-4-turbo, Claude, Gemini, and Ollama. Hindi templates with lakh/crore formatting. Leonardo + Flux for visual generation. Razorpay payments + 3-tier license system (30-day trial). Shipped to demo (Mary, Dec 2024) — currently sun-set to manage hosting costs but full codebase intact.",
+    stack: ["Python", "Flask", "OpenAI", "Anthropic", "Gemini", "Ollama", "Leonardo", "Flux", "Razorpay", "BMAD-method"],
+    hero: false,
+  },
+  {
     id: "musicians-atelier",
     name: "The Musicians' Atelier",
     subtitle: "Studio management SaaS for independent music teachers in India",
