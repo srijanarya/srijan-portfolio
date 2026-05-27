@@ -104,11 +104,11 @@ export default async function OG() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <span style={{ fontSize: 14 }}>hallucinations caught</span>
-            <span style={{ color: "#ff5e5e", fontSize: 28, letterSpacing: "0.04em" }}>1 🚩</span>
+            <span style={{ color: "#ff5e5e", fontSize: 28, letterSpacing: "0.04em" }}>1 [FLAG]</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <span style={{ fontSize: 14 }}>verified by</span>
-            <span style={{ color: "#a3a39c", fontSize: 28 }}>4 sources ✓</span>
+            <span style={{ color: "#a3a39c", fontSize: 28 }}>4 sources OK</span>
           </div>
         </div>
       </div>
