@@ -17,6 +17,7 @@ import { MetricBar } from "@/components/eval/MetricBar";
 import { HallucinationFlag } from "@/components/eval/HallucinationFlag";
 import { CornerBracket } from "@/components/eval/CornerBracket";
 import { CounterStat } from "@/components/eval/CounterStat";
+import { TestimonialBlock } from "@/components/eval/TestimonialBlock";
 import { PROJECTS } from "@/app/data/projects";
 import type { Project } from "@/app/data/types";
 
@@ -124,6 +125,9 @@ function ProjectCaseStudy({ project: p }: { project: Project }) {
           </p>
         </div>
       )}
+
+      {/* External validation (testimonials, only renders if received) */}
+      <TestimonialBlock testimonials={p.testimonials} />
 
       {/* Links */}
       {p.links && p.links.length > 0 && (

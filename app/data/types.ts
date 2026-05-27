@@ -20,6 +20,21 @@ export interface VerifiedMetric {
   source?: string;
 }
 
+/** External validation from someone other than the candidate.
+ *  Only rendered when status === "received". "pending" testimonials
+ *  are tracked in data/testimonial-pipeline.md but stay invisible
+ *  until the actual quote arrives — no over-claiming. */
+export interface Testimonial {
+  status: "pending" | "received";
+  quote?: string;                    // verbatim, only required when received
+  author: string;                    // "Jane Doe"
+  role?: string;                     // "Head of Engineering"
+  company?: string;                  // "Foo Inc"
+  source?: "linkedin" | "email" | "private-note";
+  link?: string;                     // public link (LinkedIn endorsement etc.)
+  date?: string;                     // YYYY-MM-DD when received
+}
+
 export interface Project {
   id: string;                       // url-safe slug
   name: string;
@@ -37,6 +52,7 @@ export interface Project {
     story: string;
     decisionLink?: string;
   };
+  testimonials?: Testimonial[];      // external validators (rendered only when received)
 }
 
 /** Sub-row of a trace tree — the Williams %R layered investigation. */

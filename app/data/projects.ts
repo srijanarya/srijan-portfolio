@@ -99,6 +99,54 @@ export const PROJECTS: Project[] = [
       "AI-powered content automation for Happyverse open mic and curated shows. Whisper-based audio analytics, multi-agent architecture (BMAD-method as expansion pack), Railway deployment. Cross-system: built on Treum Finance Platform infrastructure — the same backend reused for audio analysis as for financial filings.",
     stack: ["Python", "Whisper", "FastAPI", "Multi-agent", "Railway", "BMAD-method"],
     hero: false,
+    testimonials: [
+      // status:"pending" → not rendered until quote arrives. Pipeline tracked in data/testimonial-pipeline.md
+      { status: "pending", author: "Happyverse organizer", source: "linkedin" },
+    ],
+  },
+  {
+    id: "growth-gap-fund",
+    name: "Growth Gap Fund",
+    subtitle: "Live fintech dashboard — authentication, real-time investment scoring",
+    status: "shipped",
+    confidence: 0.82,
+    confidenceLabel: "MED",
+    metrics: [
+      { value: "Live",   label: "fintech dashboard with authentication + real-time investment scoring" },
+      { value: "PRD-driven", label: "structured Product Requirements Document foundation, then implementation" },
+      { value: "Public",     label: "open-source repo at github.com/srijanarya/growth-gap-fund" },
+    ],
+    blurb:
+      "Live fintech dashboard for investment scoring. Built with proper PRD-first workflow — wrote the spec, then implemented. Authentication flow, real-time scoring, public repo. Part of the AKSH / Treum AlgoTech ecosystem (treumalgotech.in).",
+    stack: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL"],
+    links: [
+      { label: "Public repo", href: "https://github.com/srijanarya/growth-gap-fund" },
+      { label: "Product page", href: "https://treumalgotech.in" },
+    ],
+    hero: false,
+    testimonials: [
+      { status: "pending", author: "Growth Gap Fund stakeholder", source: "linkedin" },
+    ],
+  },
+  {
+    id: "musicians-atelier",
+    name: "Musician's Atelier",
+    subtitle: "Offline-capable PWA for working musicians",
+    status: "shipped",
+    confidence: 0.80,
+    confidenceLabel: "MED",
+    metrics: [
+      { value: "PWA",         label: "progressive web app — installs to home screen, works offline" },
+      { value: "Offline-first", label: "service worker + IndexedDB; full functionality without network" },
+      { value: "Mobile-ready", label: "designed for musicians using it on stage / in rehearsal" },
+    ],
+    blurb:
+      "Offline-capable PWA designed for working musicians — tooling that has to work even when the venue Wi-Fi doesn't. Service-worker-driven asset caching + IndexedDB for state persistence. Designed for the real constraint: a musician on stage can't wait for a network round-trip.",
+    stack: ["Next.js", "PWA", "Service Worker", "IndexedDB", "TypeScript"],
+    hero: false,
+    testimonials: [
+      { status: "pending", author: "Musician user", source: "linkedin" },
+    ],
   },
 ];
 
