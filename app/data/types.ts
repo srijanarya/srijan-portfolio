@@ -30,7 +30,7 @@ export interface Testimonial {
   author: string;                    // "Jane Doe"
   role?: string;                     // "Head of Engineering"
   company?: string;                  // "Foo Inc"
-  source?: "linkedin" | "email" | "private-note";
+  source?: "linkedin" | "email" | "private-note" | "upwork";
   link?: string;                     // public link (LinkedIn endorsement etc.)
   date?: string;                     // YYYY-MM-DD when received
 }

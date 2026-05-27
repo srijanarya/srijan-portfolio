@@ -25,6 +25,18 @@ export const PROJECTS: Project[] = [
       { label: "Product page", href: "https://treumalgotech.in" },
     ],
     hero: true,
+    testimonials: [
+      {
+        status: "received",
+        quote:
+          "Srijan was professional throughout the project and delivered the work according to the brief. They followed instructions well.",
+        author: "Upwork client",
+        role: "Stock Market Visualizations & API Integration project",
+        source: "upwork",
+        link: "https://www.upwork.com/freelancers/~013744500dd78c9569",
+        date: "2026-02-05",
+      },
+    ],
   },
   {
     id: "earningsiq",
@@ -144,6 +156,47 @@ export const PROJECTS: Project[] = [
     blurb:
       "AI content generation platform purpose-built for Indian Mutual Fund Distributors (MFDs). Multi-LLM routing across GPT-4-turbo, Claude, Gemini, and Ollama. Hindi templates with lakh/crore formatting. Leonardo + Flux for visual generation. Razorpay payments + 3-tier license system (30-day trial). Shipped to demo (Mary, Dec 2024) — currently sun-set to manage hosting costs but full codebase intact.",
     stack: ["Python", "Flask", "OpenAI", "Anthropic", "Gemini", "Ollama", "Leonardo", "Flux", "Razorpay", "BMAD-method"],
+    hero: false,
+  },
+  {
+    id: "p2p-tracker",
+    name: "P2P Crypto Arbitrage Scanner",
+    subtitle: "Enterprise-grade scanner across 8 exchanges with ML prediction + real-time execution",
+    status: "shipped",
+    confidence: 0.85,
+    confidenceLabel: "HIGH",
+    metrics: [
+      { value: "8 exchanges",  label: "real-time WebSocket connections + order routing across CEX/P2P venues" },
+      { value: "85%+",         count: 85, suffix: "%", label: "ML prediction accuracy — Random Forest + XGBoost + LSTM ensemble" },
+      { value: "<1ms",         label: "real-time inference latency · 10,000+ orders/sec throughput" },
+      { value: "Kelly",        label: "Kelly-criterion-based risk-adjusted position sizing" },
+    ],
+    blurb:
+      "Production-ready P2P cryptocurrency arbitrage system. ML ensemble (RF + XGBoost + LSTM) predicts arbitrage windows; real-time execution engine places orders across 8 exchanges; Kelly Criterion sizes positions risk-adjusted. Repo ships with a SECURITY_AUDIT.md and a SETUP_GUIDE.md — no real keys committed (verified by gitleaks-style scanning).",
+    stack: ["Python", "Random Forest", "XGBoost", "LSTM", "WebSocket", "Kelly Criterion", "8-exchange APIs"],
+    links: [
+      { label: "Public repo", href: "https://github.com/srijanarya/p2p-tracker" },
+    ],
+    hero: false,
+  },
+  {
+    id: "usdt-arbitrage-bot",
+    name: "USDT Arbitrage Bot",
+    subtitle: "Real-time USDT/USDC arbitrage across 5 exchanges with Indian TDS handling",
+    status: "shipped",
+    confidence: 0.82,
+    confidenceLabel: "MED",
+    metrics: [
+      { value: "5 exchanges", label: "CoinDCX · ZebPay · Binance · KuCoin · CoinSwitch — WebSocket price monitoring" },
+      { value: "TDS-aware",   label: "1% Indian-exchange TDS factored into profit calculation (most bots miss this)" },
+      { value: "Live UI",     label: "auto-refreshing web dashboard + REST API + PostgreSQL historical store" },
+    ],
+    blurb:
+      "Real-time cryptocurrency arbitrage bot monitoring USDT/USDC price differences across 5 exchanges. Indian-exchange-aware: factors the 1% TDS most arbitrage bots forget about. WebSocket price feeds, live dashboard, PostgreSQL historical store, REST API. TypeScript on Node 18+.",
+    stack: ["TypeScript", "Node.js 18", "WebSocket", "PostgreSQL", "REST API"],
+    links: [
+      { label: "Public repo (MIT)", href: "https://github.com/srijanarya/usdt-arbitrage-bot" },
+    ],
     hero: false,
   },
   {
