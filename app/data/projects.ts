@@ -98,22 +98,27 @@ export const PROJECTS: Project[] = [
   {
     id: "comedy-metrics",
     name: "Comedy Metrics",
-    subtitle: "Multi-agent audio analytics for live comedy performance",
+    subtitle: "AI laugh-detection analytics for live stand-up + Happyverse open mic event platform",
     status: "shipped",
-    confidence: 0.84,
-    confidenceLabel: "MED",
+    confidence: 0.88,
+    confidenceLabel: "HIGH",
     metrics: [
-      { value: "Whisper",       label: "speech-to-text engine analyzing stand-up sets — laugh detection + timing + transcript" },
-      { value: "Multi-agent",   label: "BMAD-method expansion pack: agents/ + backend/ + comedy_metrics/ + frontend/ + tests/" },
-      { value: "Railway",       label: "production deployment with deterministic-mode validation + recovery system" },
+      { value: "LIVE",          label: "happyverseopenmic.netlify.app — performer registration with WhatsApp confirmation (English / Hindi / Hinglish / Marathi)" },
+      { value: "9 performers",  count: 9, label: "analyzed in production Oct 27 2025 — Rishi 3.18 LPM (Headliner), Ashlyn 3.08 LPM (Professional)" },
+      { value: "0.027%",        count: 0.027, precision: 3, suffix: "%", label: "variance on same-file repeat tests — 99.97% deterministic via COMEDY_DETERMINISTIC_MODE + CPU fallback" },
+      { value: "LPM + ALD",     label: "novel metrics: Laughs Per Minute + Average Laugh Duration → maps performers to Headliner / Professional / Beginner tiers" },
     ],
     blurb:
-      "AI-powered content automation for Happyverse open mic and curated shows. Whisper-based audio analytics, multi-agent architecture (BMAD-method as expansion pack), Railway deployment. Cross-system: built on Treum Finance Platform infrastructure — the same backend reused for audio analysis as for financial filings.",
-    stack: ["Python", "Whisper", "FastAPI", "Multi-agent", "Railway", "BMAD-method"],
+      "AI laugh-detection analytics for live stand-up comedy + a working open mic event platform. The Whisper-based pipeline analyzes recordings to produce LPM (Laughs Per Minute) and ALD (Average Laugh Duration) — novel metrics for comedy performance. Determinism was the original ship-blocker: caught a 'system is inconsistent' bug, proved it was actually user comparing different audio files, then locked in CPU fallback + seeded RNG → 0.027% variance on repeat. Multi-agent architecture using BMAD-method expansion pack. Front-end LIVE on Netlify; backend API was on Railway (sun-set for cost).",
+    stack: ["Python", "Whisper", "FastAPI", "Multi-agent", "Railway", "Netlify", "BMAD-method", "WhatsApp API"],
+    links: [
+      { label: "Live event platform", href: "https://happyverseopenmic.netlify.app" },
+    ],
     hero: false,
     testimonials: [
-      // status:"pending" → not rendered until quote arrives. Pipeline tracked in data/testimonial-pipeline.md
-      { status: "pending", author: "Happyverse organizer", source: "linkedin" },
+      // Pending — performers Rishi (Headliner, 3.18 LPM) and Ashlyn (Professional, 3.08 LPM, 28 laughs detected) are strong named-user candidates.
+      // Tracked in data/testimonial-pipeline.md
+      { status: "pending", author: "Rishi (Headliner — Oct 27 2025 set)", source: "linkedin" },
     ],
   },
   {
