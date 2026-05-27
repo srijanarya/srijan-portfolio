@@ -130,22 +130,22 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "musicians-atelier",
-    name: "Musician's Atelier",
-    subtitle: "Offline-capable PWA for working musicians",
+    name: "The Musicians' Atelier",
+    subtitle: "Studio management SaaS for independent music teachers in India",
     status: "shipped",
-    confidence: 0.80,
+    confidence: 0.83,
     confidenceLabel: "MED",
     metrics: [
-      { value: "PWA",         label: "progressive web app — installs to home screen, works offline" },
-      { value: "Offline-first", label: "service worker + IndexedDB; full functionality without network" },
-      { value: "Mobile-ready", label: "designed for musicians using it on stage / in rehearsal" },
+      { value: "v1 LIVE",   label: "client-side PWA on Netlify — students + cycles + scheduling + fees + WhatsApp" },
+      { value: "3,200+",    count: 3200, suffix: "+", label: "lines of React + zustand (5 pages, IndexedDB-backed)" },
+      { value: "6-table",   label: "multi-tenant schema (teachers / students / cycles / sessions / payments / instrument_rentals) with Row-Level Security" },
     ],
     blurb:
-      "Offline-capable PWA designed for working musicians — tooling that has to work even when the venue Wi-Fi doesn't. Service-worker-driven asset caching + IndexedDB for state persistence. Designed for the real constraint: a musician on stage can't wait for a network round-trip.",
-    stack: ["Next.js", "PWA", "Service Worker", "IndexedDB", "TypeScript"],
+      "Studio management platform purpose-built for independent music teachers in India. v1 live on Netlify — pure client-side PWA managing students, lesson cycles, scheduling, fees, and WhatsApp communications via IndexedDB (zero cloud cost). v2 in PRD: Supabase cloud sync + Row-Level Security, automated WhatsApp notifications, instrument rentals, churn analytics. Target: 10–100 students per teacher, Hindi/English bilingual.",
+    stack: ["React 19", "Vite", "zustand", "Supabase", "IndexedDB (idb)", "date-fns", "react-router 7"],
     hero: false,
     testimonials: [
-      { status: "pending", author: "Musician user", source: "linkedin" },
+      { status: "pending", author: "Music teacher user (v1 Netlify deployment)", source: "linkedin" },
     ],
   },
 ];
