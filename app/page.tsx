@@ -120,12 +120,98 @@ export default function Home() {
             </div>
           </div>
 
+          {/* EXTERNAL INPUTS — all the public surfaces (anchored at #contact) */}
+          <div id="contact" className="animate-fade-up stagger-6 scroll-mt-24">
+            <SectionMarker label="external inputs" className="mb-3" />
+            <p className="text-ink-mute text-sm mb-4 max-w-[60ch]">
+              Reach me directly. All four channels read.
+            </p>
+            <div className="grid gap-px bg-line border border-line text-sm max-w-2xl">
+              <EvalRow
+                label="email"
+                value={
+                  <a
+                    href="mailto:srijanaryay@gmail.com"
+                    className="text-confidence hover:underline underline-offset-4 break-all"
+                  >
+                    srijanaryay@gmail.com
+                  </a>
+                }
+              />
+              <EvalRow
+                label="github"
+                value={
+                  <a
+                    href="https://github.com/srijanarya"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-confidence hover:underline underline-offset-4 break-all"
+                  >
+                    github.com/srijanarya ↗
+                  </a>
+                }
+              />
+              <EvalRow
+                label="linkedin"
+                value={
+                  <a
+                    href="https://linkedin.com/in/srijan-arya-a0a50693"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-confidence hover:underline underline-offset-4 break-all"
+                  >
+                    linkedin.com/in/srijan-arya-a0a50693 ↗
+                  </a>
+                }
+              />
+              <EvalRow
+                label="upwork"
+                value={
+                  <a
+                    href="https://www.upwork.com/freelancers/~013744500dd78c9569"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-confidence hover:underline underline-offset-4 break-all"
+                  >
+                    upwork.com/freelancers/~013744500dd78c9569 ↗
+                  </a>
+                }
+              />
+              <EvalRow
+                label="aksh repo"
+                value={
+                  <a
+                    href="https://github.com/srijanarya/aksh-trading-systems"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-confidence hover:underline underline-offset-4 break-all"
+                  >
+                    github.com/srijanarya/aksh-trading-systems ↗
+                  </a>
+                }
+              />
+              <EvalRow
+                label="brain iqc 2026"
+                value={
+                  <a
+                    href="https://platform.worldquantbrain.com/competition/IQC2026"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-confidence hover:underline underline-offset-4 break-all"
+                  >
+                    platform.worldquantbrain.com/competition/IQC2026 ↗
+                  </a>
+                }
+              />
+            </div>
+          </div>
+
           {/* BUILD PROVENANCE — eval-tool genre signal */}
-          <footer className="animate-fade-up stagger-6 border-t border-line pt-6 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+          <footer className="border-t border-line pt-6 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <span>▸ build_block 2/7 deployed</span>
+              <span>eval_run #{RUN.id}</span>
               <span className="text-ink-mute">
-                next: /work (block 4) · /decisions (block 5) · /how-i-work (block 6)
+                · srijan-portfolio · IST 2026-05-27 · provenance: github/srijanarya
               </span>
             </div>
           </footer>

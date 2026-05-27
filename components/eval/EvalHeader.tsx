@@ -7,11 +7,9 @@ import Link from "next/link";
 export function EvalHeader({
   runId,
   subject,
-  email = "srijanaryay@gmail.com",
 }: {
   runId: string;
   subject: string;
-  email?: string;
 }) {
   return (
     <header className="border-b border-line sticky top-0 z-40 bg-canvas/90 backdrop-blur-sm">
@@ -27,12 +25,12 @@ export function EvalHeader({
           <Link href="/work"       className="hover:text-ink transition">./work</Link>
           <Link href="/decisions"  className="hover:text-ink transition">./decisions</Link>
           <Link href="/how-i-work" className="hover:text-ink transition">./how-i-work</Link>
-          <a
-            href={`mailto:${email}`}
+          <Link
+            href="/#contact"
             className="text-confidence hover:underline underline-offset-4"
           >
             contact ↗
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
