@@ -22,11 +22,12 @@ import { DECISIONS } from "@/app/data/projects";
 export const metadata: Metadata = {
   title: "Decisions",
   description:
-    "Two production AI ideas I distrusted hard enough to kill before deploying. The Williams %R alpha factor and the EarningsIQ Honest Accuracy Report.",
+    "Three production AI ideas I distrusted hard enough to kill or rebuild before deploying. Williams %R alpha factor (parameter overfitting), EarningsIQ Honest Accuracy (circular validation), and 3 months of AKSH ML backtests invalidated by a 1-day look-ahead bias.",
 };
 
 const williams = DECISIONS.find((d) => d.id === "williams-r")!;
 const honest   = DECISIONS.find((d) => d.id === "honest-accuracy")!;
+const akshMl   = DECISIONS.find((d) => d.id === "aksh-ml-lookahead")!;
 
 function DecisionFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -186,12 +187,78 @@ export default function DecisionsPage() {
           </DecisionFrame>
         </div>
 
+        {/* ─────────── AKSH ML Look-Ahead Bias ─────────── */}
+        <div id="aksh-ml-lookahead" className="animate-fade-up mb-14">
+          <DecisionFrame>
+            <header className="flex items-baseline justify-between gap-4 mb-6">
+              <h2 className="text-3xl sm:text-4xl text-ink leading-none">
+                The 3-month ML system invalidated by 1 day of look-ahead
+              </h2>
+              <span className="text-[10px] uppercase tracking-[0.16em] text-warn shrink-0">
+                [ {akshMl.outcome} ]
+              </span>
+            </header>
+
+            <div className="max-w-[64ch] mb-10">
+              <p className="text-ink-mute mb-5 leading-relaxed">
+                <strong className="text-ink">Where it started.</strong>{" "}
+                3 months (Aug–Nov 2025) building a production ML system to predict upper-circuit movements in Indian stocks. Infrastructure: XGBoost + multi-agent orchestration + AWS LightSail + FastAPI + model registry. End-to-end ML engineering: feature pipelines, model training, deployment.
+              </p>
+              <p className="text-ink-mute mb-5 leading-relaxed">
+                <strong className="text-ink">What went wrong.</strong>{" "}
+                The backtest used Angel One closing prices for <code className="text-ink">2024-11-01</code> as entry signals when the backtest was supposed to end <code className="text-ink">2024-10-31</code>. The bug: <code className="text-ink">end_date=&quot;2024-11-01&quot;</code> was assumed exclusive — Angel One&apos;s API treats it as inclusive. Compounded by a second issue: signal generation grabbed <code className="text-ink">data[&apos;close&apos;].iloc[-1]</code> with no validation that the last row was within the backtest window.
+              </p>
+              <p className="text-ink-mute leading-relaxed">
+                <strong className="text-ink">How it surfaced.</strong>{" "}
+                Not from any error or warning — the bug produced plausible results. Discovered by cross-referencing entry prices against Yahoo Finance: <strong className="text-ink">NECCLTD entry ₹33.93 vs ₹30.85</strong> (Nov 1 close vs Oct 31 close), <strong className="text-ink">PRUDENT ₹3520.50 vs ₹3110.02</strong>. The system had been using future information for months.
+              </p>
+            </div>
+
+            {/* Pull quote */}
+            <div className="my-10 border-l-2 border-warn pl-6 max-w-[60ch]">
+              <p className="font-serif-italic text-xl sm:text-2xl text-ink leading-snug">
+                {akshMl.pull}
+              </p>
+            </div>
+
+            {/* Killer viz: 3-layer failure trace */}
+            <SectionMarker label="3-layer failure cascade · trace" className="mb-4" />
+            {akshMl.trace && <TraceTree node={akshMl.trace} />}
+
+            {/* Failure-mode table */}
+            <div className="mt-10">
+              <SectionMarker label="systematic failure modes" className="mb-4" />
+              {akshMl.failureModes && (
+                <EvalLogTable
+                  columns={["mode", "freq", "impact"]}
+                  rows={akshMl.failureModes}
+                />
+              )}
+            </div>
+
+            {/* Closing principle */}
+            <div className="mt-10 max-w-[64ch] border-t border-line pt-8">
+              <SectionMarker label="rearchitecture" className="mb-3" />
+              <p className="text-ink-mute leading-relaxed">
+                Wrote LOOK_AHEAD_BIAS_POSTMORTEM.md documenting the bug + evidence + root cause + prevention guide. Built a <code className="text-ink">BacktestValidator</code> class with explicit checks: look-ahead detection, data integrity validation, signal timing verification, price sanity. The hypothesis the system was testing turned out to be wrong anyway (38% win rate vs 60% target) — but the validation framework is what survived and now gates every backtest.
+              </p>
+            </div>
+
+            <div className="mt-6 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+              source · {akshMl.source}
+            </div>
+          </DecisionFrame>
+        </div>
+
         {/* ─────────── Synthesis ─────────── */}
         <div className="animate-fade-up mb-12 max-w-[72ch]">
           <SectionMarker label="what these decisions have in common" className="mb-4" />
           <div className="space-y-5 text-ink leading-relaxed">
             <p>
-              Both are examples of <strong>distrusting my own promising results</strong>. Most engineers ship when the first metric looks good. The discipline I&apos;m trying to internalize is: <em>if you can&apos;t independently verify it, you don&apos;t know it.</em>
+              Three distinct categories of bad-eval methodology — <strong>parameter overfitting</strong> (Williams %R regime-dependent fluke), <strong>circular validation</strong> (EarningsIQ tautology), and <strong>temporal data leak</strong> (AKSH ML look-ahead bias). All three caught in my own work. All three documented honestly.
+            </p>
+            <p>
+              The common thread: <strong>distrusting my own promising results</strong>. Most engineers ship when the first metric looks good. The discipline I&apos;m trying to internalize is: <em>if you can&apos;t independently verify it, you don&apos;t know it.</em> Validation methodology is the foundation. Everything else is decoration.
             </p>
             <p>
               That same logic now sits underneath everything I build. Every system has an explicit answer to: <em>how do we know it&apos;s working, what happens when it fails, and when do we not trust it?</em> Whether the system is AI or not.

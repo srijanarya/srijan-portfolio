@@ -83,6 +83,23 @@ export const PROJECTS: Project[] = [
     links: [{ label: "IQC 2026 platform", href: "https://platform.worldquantbrain.com/competition/IQC2026" }],
     hero: false,
   },
+  {
+    id: "comedy-metrics",
+    name: "Comedy Metrics",
+    subtitle: "Multi-agent audio analytics for live comedy performance",
+    status: "shipped",
+    confidence: 0.84,
+    confidenceLabel: "MED",
+    metrics: [
+      { value: "Whisper",       label: "speech-to-text engine analyzing stand-up sets — laugh detection + timing + transcript" },
+      { value: "Multi-agent",   label: "BMAD-method expansion pack: agents/ + backend/ + comedy_metrics/ + frontend/ + tests/" },
+      { value: "Railway",       label: "production deployment with deterministic-mode validation + recovery system" },
+    ],
+    blurb:
+      "AI-powered content automation for Happyverse open mic and curated shows. Whisper-based audio analytics, multi-agent architecture (BMAD-method as expansion pack), Railway deployment. Cross-system: built on Treum Finance Platform infrastructure — the same backend reused for audio analysis as for financial filings.",
+    stack: ["Python", "Whisper", "FastAPI", "Multi-agent", "Railway", "BMAD-method"],
+    hero: false,
+  },
 ];
 
 export const DECISIONS: Decision[] = [
@@ -137,6 +154,48 @@ export const DECISIONS: Decision[] = [
       { num: 4, cells: { mode: "catastrophic",          freq: "—",   impact: "10,000× magnitude misreads" }, severity: "HIGH" },
       { num: 5, cells: { mode: "cross-field contam",    freq: "—",   impact: "wrong row of the table" }, severity: "MED" },
       { num: 6, cells: { mode: "date mismatches",       freq: "—",   impact: "current qtr data into prior qtr fields" }, severity: "MED" },
+    ],
+  },
+  {
+    id: "aksh-ml-lookahead",
+    title: "The 3-month ML system invalidated by 1 day of look-ahead",
+    pull:
+      "The bug produced plausible results — prices existed, just from the wrong date. No warnings, no errors. Only discovered when comparing with Yahoo Finance. Silent failures compound: by the time you notice, you're months into wrong outputs.",
+    body: "",
+    outcome: "REARCHITECTED",
+    source: "AKSH ML system (Aug–Nov 2025) · LOOK_AHEAD_BIAS_POSTMORTEM.md · 2025-11-20",
+    trace: {
+      label: "Look-ahead bias — 3-layer failure cascade",
+      children: [
+        { label: "Layer 1: API behavior assumption",
+          metric: "Angel One end-date inclusive",
+          outcome: "RED FLAG",
+          children: [{ label: "set end_date=\"2024-11-01\" assuming exclusive — actually inclusive" }] },
+        { label: "Layer 2: No date validation in signal generation",
+          metric: "data['close'].iloc[-1]",
+          outcome: "RED FLAG",
+          children: [{ label: "always grabbed last close in the data — sometimes a future date" }] },
+        { label: "Layer 3: Silent failure",
+          metric: "plausible prices, no errors",
+          outcome: "COLLAPSE",
+          children: [
+            { label: "NECCLTD entry ₹33.93 (Nov 1) vs ₹30.85 (Oct 31)" },
+            { label: "PRUDENT entry ₹3520.50 (Nov 1) vs ₹3110.02 (Oct 31)" },
+          ],
+        },
+        { label: "Verdict: 3 months of backtests invalidated",
+          children: [
+            { label: "Caught via independent Yahoo Finance cross-reference" },
+            { label: "Built BacktestValidator class — look-ahead detection + signal timing checks + price sanity", outcome: "DROPPED" },
+          ],
+        },
+      ],
+    },
+    failureModes: [
+      { num: 1, cells: { mode: "look-ahead bias",            freq: "100% of backtest", impact: "future close prices as entry signals" }, severity: "HIGH" },
+      { num: 2, cells: { mode: "wrong stock universe",        freq: "68.7%",            impact: "824/1200 stocks were dead listings (Yahoo 404)" }, severity: "HIGH" },
+      { num: 3, cells: { mode: "bond/debt contamination",     freq: "7.8%",             impact: "436/5,575 symbols were non-equity (cleaned out)" }, severity: "MED" },
+      { num: 4, cells: { mode: "no temporal validation",      freq: "—",                impact: "system blindly used data['close'].iloc[-1]" }, severity: "HIGH" },
     ],
   },
 ];
