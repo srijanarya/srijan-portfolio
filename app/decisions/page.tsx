@@ -101,7 +101,16 @@ export default function DecisionsPage() {
             <div className="mt-10 max-w-[64ch] border-t border-line pt-8">
               <SectionMarker label="principle" className="mb-3" />
               <p className="text-ink leading-relaxed">
-                Most quant strategies fail not because the math is wrong but because the methodology is. One promising backtest is the noise floor. Six layers of stress-testing is the floor for <em>decide to ship</em>. The investigation lives at <code className="text-ink-mute">WILLIAMS_R_DECISION.md</code> in the BRAIN IQC alpha-research notes — separate from the live AKSH trading system, which doesn&apos;t run this signal.
+                Most quant strategies fail not because the math is wrong but because the methodology is. One promising backtest is the noise floor. Six layers of stress-testing is the floor for <em>decide to ship</em>. Full investigation public at{" "}
+                <a
+                  href="https://github.com/srijanarya/aksh-backtesting-trading/blob/main/_bmad-output/brain_integration/WILLIAMS_R_DECISION.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-confidence hover:underline underline-offset-4"
+                >
+                  <code>WILLIAMS_R_DECISION.md</code> ↗
+                </a>
+                .
               </p>
             </div>
 

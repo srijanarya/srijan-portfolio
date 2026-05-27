@@ -151,7 +151,7 @@ export default function HowIWorkPage() {
           <Link href="/work" className="hover:text-ink transition">← /work</Link>
           <Link href="/decisions" className="hover:text-ink transition">← /decisions</Link>
           <a
-            href="https://github.com/srijanarya/aksh-trading-systems"
+            href="https://github.com/srijanarya/aksh-backtesting-trading"
             target="_blank"
             rel="noopener noreferrer"
             className="text-confidence hover:underline underline-offset-4 ml-auto"

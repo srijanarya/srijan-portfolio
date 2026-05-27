@@ -181,12 +181,12 @@ export default function Home() {
                 label="aksh repo"
                 value={
                   <a
-                    href="https://github.com/srijanarya/aksh-trading-systems"
+                    href="https://github.com/srijanarya/aksh-backtesting-trading"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-confidence hover:underline underline-offset-4 break-all"
                   >
-                    github.com/srijanarya/aksh-trading-systems ↗
+                    github.com/srijanarya/aksh-backtesting-trading ↗
                   </a>
                 }
               />

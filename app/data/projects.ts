@@ -21,7 +21,7 @@ export const PROJECTS: Project[] = [
       "Live NSE options platform built solo over three years. During one full session where the primary data feed went down all day, the reliability layer auto-switched to a backup 377 times with no downtime and no missed trades.",
     stack: ["Python", "FastAPI", "PostgreSQL", "React", "Zerodha Kite", "AWS"],
     links: [
-      { label: "Public architecture walkthrough", href: "https://github.com/srijanarya/aksh-trading-systems" },
+      { label: "Public architecture walkthrough", href: "https://github.com/srijanarya/aksh-backtesting-trading" },
       { label: "Product page", href: "https://treumalgotech.in" },
     ],
     hero: true,
