@@ -93,7 +93,7 @@ export const DECISIONS: Decision[] = [
       "A signal with year-over-year Sharpe std of 1.61 is regime-dependent. It worked in one year because the market happened to favor mean-reversion that year. Not because the indicator captures something real.",
     body: "", // populated in Block 5 from decisions.md
     outcome: "DROPPED",
-    source: "commit 146c9c09 · WILLIAMS_R_DECISION.md",
+    source: "BRAIN IQC research · commit 146c9c09 · WILLIAMS_R_DECISION.md",
     trace: {
       label: "Williams %R investigation",
       children: [
