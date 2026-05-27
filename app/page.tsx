@@ -1,16 +1,22 @@
 /**
- * AI Eval Dashboard — Home Hero (Block 1 minimum-viable)
+ * AI Eval Dashboard — Home (Block 2/7 deployed)
  *
  * The meta-joke: this portfolio is rendered as a real Anthropic/Patronus-style
  * eval-tool dashboard. The "AI run" being evaluated IS Srijan.
  *
- * Block 1 ships ONLY the hero. Blocks 2-7 add components, project cards,
- * and the killer /decisions page. This file gets expanded in Block 3.
+ * Block 2 refactor: every inline JSX block from Block 1 is now a typed
+ * component imported from `components/eval/*`. Three EvalCards (AKSH,
+ * EarningsIQ, bmad-leadgen) replace the old "next: project cards" placeholder.
  */
 
-import Link from "next/link";
+import { EvalHeader } from "@/components/eval/EvalHeader";
+import { EvalRow } from "@/components/eval/EvalRow";
+import { ConfidenceBar } from "@/components/eval/ConfidenceBar";
+import { EvalCard } from "@/components/eval/EvalCard";
+import { HallucinationFlag } from "@/components/eval/HallucinationFlag";
+import { SectionMarker } from "@/components/eval/SectionMarker";
+import { heroProjects } from "@/app/data/projects";
 
-// ---- Eval data — single source-of-truth (will move to data/ in Block 2) ----
 const RUN = {
   id: "001",
   subject: "SRIJAN-3YR-SOLO-FOUNDER-V3",
@@ -19,103 +25,72 @@ const RUN = {
   hallucinationsCaught: 1,
   sourcesVerified: 4,
   lastEval: "2026-05-27T18:00:00+05:30",
+  // The locked verdict line — from the canonical STAR+R pitch in the
+  // AI-Native Engineer identity memory file. This is the eval thesis.
   verdict:
-    "This portfolio is my latest production AI. The system being evaluated is me — three years of solo-shipping production AI for live markets, with 400,000+ LOC and one published hallucination caught in flight. Inspect any card to read the run.",
+    "My core thesis is that the next-decade differentiator in agentic AI isn't the prompt — it's the eval. Every team can ship a demo. Very few can ship a system that knows when it's wrong.",
 };
 
-// Format the percentage display with a leading zero discipline
-const pct = (n: number) => (n * 100).toFixed(1) + "%";
-
 export default function Home() {
+  const projects = heroProjects();
+
   return (
     <main className="flex flex-1 flex-col">
-      {/* ─────────── TOP STATUS BAR ─────────── */}
-      <header className="border-b border-line">
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-6 py-3 text-[11px] uppercase tracking-[0.16em] text-ink-mute">
-          <div className="flex items-center gap-3">
-            <span className="size-1.5 rounded-full bg-confidence animate-pulse" />
-            <span className="text-ink">eval_run #{RUN.id}</span>
-            <span className="text-ink-faint">·</span>
-            <span>{RUN.subject}</span>
-          </div>
-          <div className="hidden items-center gap-5 sm:flex">
-            <Link href="/work"        className="hover:text-ink transition">./work</Link>
-            <Link href="/decisions"   className="hover:text-ink transition">./decisions</Link>
-            <Link href="/how-i-work"  className="hover:text-ink transition">./how-i-work</Link>
-            <a href="mailto:srijanaryacomp@gmail.com"
-               className="text-confidence hover:underline underline-offset-4">contact ↗</a>
-          </div>
-        </div>
-      </header>
+      <EvalHeader runId={RUN.id} subject={RUN.subject} />
 
-      {/* ─────────── HERO ─────────── */}
-      <section className="relative flex-1">
-        <div className="mx-auto grid max-w-[1200px] gap-12 px-6 py-16 md:py-24 lg:py-32">
+      <section className="relative">
+        <div className="mx-auto grid max-w-[1200px] gap-14 px-6 py-16 md:py-24 lg:py-28">
 
-          {/* CONFIDENCE BAR — the one choreographed animation */}
-          <div
-            className="animate-fade-up"
-            style={{ ["--fill-pct" as string]: RUN.confidence }}
-          >
-            <div className="flex items-baseline justify-between text-[11px] uppercase tracking-[0.16em] text-ink-mute mb-2">
-              <span>confidence_score</span>
-              <span className="text-confidence">
-                {pct(RUN.confidence)}
-                <span className="ml-3 text-ink-mute">[{RUN.confidenceLabel}]</span>
-              </span>
-            </div>
-            <div className="relative h-[6px] w-full overflow-hidden bg-paper border border-line">
-              <div
-                className="animate-fill-bar absolute inset-y-0 left-0 w-full bg-confidence"
-                style={{ transform: `scaleX(${RUN.confidence})` }}
-              />
-            </div>
+          {/* CONFIDENCE BAR — the one choreographed page-load animation */}
+          <div className="animate-fade-up">
+            <ConfidenceBar
+              value={RUN.confidence}
+              label={`confidence_score · ${RUN.confidenceLabel}`}
+            />
           </div>
 
-          {/* NAME + ROLE */}
+          {/* IDENTITY */}
           <div className="animate-fade-up stagger-2">
+            <SectionMarker label="identity" className="mb-3" />
             <h1 className="text-5xl sm:text-6xl md:text-7xl text-ink leading-[0.95] tracking-tight">
               Srijan Arya<span className="text-confidence animate-cursor">_</span>
             </h1>
             <p className="mt-4 text-xl sm:text-2xl text-ink-mute">
               AI-Native Senior Engineer
-              <span className="mx-3 text-ink-faint">·</span>
-              <span className="text-ink-mute">Mumbai → remote</span>
+              <span className="mx-3 text-ink-faint" aria-hidden>·</span>
+              <span>Mumbai → remote</span>
             </p>
           </div>
 
-          {/* VERDICT PULL — Instrument Serif italic, the editorial moment */}
-          <div className="animate-fade-up stagger-3 max-w-[64ch]">
-            <div className="text-[11px] uppercase tracking-[0.16em] text-ink-faint mb-3">
-              verdict
-            </div>
+          {/* VERDICT — Instrument Serif italic editorial pull */}
+          <div className="animate-fade-up stagger-3 max-w-[72ch]">
+            <SectionMarker label="verdict" className="mb-3" />
             <p className="font-serif-italic text-2xl sm:text-3xl text-ink leading-[1.35]">
               {RUN.verdict}
             </p>
           </div>
 
-          {/* EVAL METADATA TABLE — the dashboard-row aesthetic */}
+          {/* EVAL METADATA TABLE */}
           <div className="animate-fade-up stagger-4 grid gap-px bg-line border border-line text-sm max-w-2xl">
-            <MetaRow
+            <EvalRow
               label="hallucinations_caught"
               value={
-                <span className="inline-flex items-center gap-2 text-critical">
-                  <span className="size-1.5 rounded-full bg-critical animate-flag" />
-                  {RUN.hallucinationsCaught}
-                  <Link
-                    href="/decisions"
-                    className="ml-3 text-ink-mute hover:text-ink underline-offset-4 hover:underline"
-                  >
-                    → see /decisions
-                  </Link>
+                <HallucinationFlag
+                  count={RUN.hallucinationsCaught}
+                  href="/decisions#honest-accuracy"
+                  inline
+                />
+              }
+            />
+            <EvalRow
+              label="verified_by"
+              value={
+                <span className="text-confidence-dim">
+                  {RUN.sourcesVerified} sources ✓
                 </span>
               }
             />
-            <MetaRow
-              label="verified_by"
-              value={<span className="text-confidence-dim">{RUN.sourcesVerified} sources ✓</span>}
-            />
-            <MetaRow
+            <EvalRow
               label="last_eval"
               value={
                 <span className="text-ink-mute">
@@ -127,31 +102,35 @@ export default function Home() {
                 </span>
               }
             />
-            <MetaRow
+            <EvalRow
               label="status"
-              value={<span className="text-confidence">ACCEPTING NEW EVALUATIONS</span>}
+              value={
+                <span className="text-confidence">ACCEPTING NEW EVALUATIONS</span>
+              }
             />
           </div>
 
-          {/* STAGE-1 BANNER — honest about what's still being built */}
-          <div className="animate-fade-up stagger-5 text-[11px] uppercase tracking-[0.16em] text-ink-faint border-t border-line pt-6">
-            ▸ build_block 1/7 deployed ·
-            <span className="text-ink-mute"> next: project cards (block 2-3), /decisions (block 5)</span>
+          {/* SELECTED RESPONSES — 3 hero project cards */}
+          <div className="animate-fade-up stagger-5">
+            <SectionMarker label="selected responses" className="mb-6" />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((p) => (
+                <EvalCard key={p.id} project={p} />
+              ))}
+            </div>
           </div>
+
+          {/* BUILD PROVENANCE — eval-tool genre signal */}
+          <footer className="animate-fade-up stagger-6 border-t border-line pt-6 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <span>▸ build_block 2/7 deployed</span>
+              <span className="text-ink-mute">
+                next: /work (block 4) · /decisions (block 5) · /how-i-work (block 6)
+              </span>
+            </div>
+          </footer>
         </div>
       </section>
     </main>
-  );
-}
-
-// ───────────────────── helper ─────────────────────
-function MetaRow({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div className="grid grid-cols-[200px_1fr] bg-canvas px-4 py-3 eval-row">
-      <span className="text-[11px] uppercase tracking-[0.14em] text-ink-faint self-center">
-        {label}
-      </span>
-      <span className="text-ink">{value}</span>
-    </div>
   );
 }
