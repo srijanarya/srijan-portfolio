@@ -103,7 +103,7 @@ export default function DecisionsPage() {
               <p className="text-ink leading-relaxed">
                 Most quant strategies fail not because the math is wrong but because the methodology is. One promising backtest is the noise floor. Six layers of stress-testing is the floor for <em>decide to ship</em>. Full investigation public at{" "}
                 <a
-                  href="https://github.com/srijanarya/aksh-backtesting-trading/blob/main/_bmad-output/brain_integration/WILLIAMS_R_DECISION.md"
+                  href="https://github.com/srijanarya/aksh-backtesting-trading/blob/showcase/_bmad-output/brain_integration/WILLIAMS_R_DECISION.md"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-confidence hover:underline underline-offset-4"
