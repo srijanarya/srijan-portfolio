@@ -1,0 +1,473 @@
+<title>Claude Code & AI Automation Audit — Srijan Arya</title>
+
+
+<style>
+  :root {
+    --paper:   #F1F3F2;
+    --surface: #FBFCFB;
+    --ink:     #14181B;
+    --slate:   #59636B;
+    --pine:    #0E6B5A;
+    --pine-deep:#0A5245;
+    --brick:   #B0433A;
+    --line:    #D5DBD7;
+    --line-strong:#BCC5BF;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(28px, 6vw, 72px) clamp(20px, 5vw, 40px) 96px;
+  }
+
+  /* ---- draft bar (delete on publish) ---- */
+  .draftbar {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    background: #201A0E;
+    color: #E8D9AE;
+    padding: 8px 16px;
+    text-align: center;
+  }
+  .draftbar b { color: #F4E7BE; font-weight: 600; }
+
+  /* ---- eyebrow ---- */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pine);
+    margin: 0 0 22px;
+  }
+  .eyebrow::before { content: "// "; color: var(--line-strong); }
+
+  /* ---- hero ---- */
+  h1 {
+    font-size: clamp(32px, 6.4vw, 52px);
+    line-height: 1.04;
+    letter-spacing: -0.026em;
+    font-weight: 750;
+    text-wrap: balance;
+    margin: 0 0 24px;
+    max-width: 15ch;
+  }
+  .lede {
+    font-size: clamp(18px, 2.4vw, 21px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 60ch;
+    margin: 0 0 8px;
+  }
+  .lede .quiet { color: var(--slate); }
+  .lede strong { font-weight: 600; }
+
+  /* ---- receipts strip ---- */
+  .receipts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin: 40px 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .receipt {
+    background: var(--surface);
+    padding: 16px 18px;
+  }
+  @media (max-width: 560px) { .receipts { grid-template-columns: repeat(2, 1fr); } }
+  .receipt .n {
+    font-family: var(--mono);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .receipt .k {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-top: 4px;
+  }
+
+  /* ---- loom slot ---- */
+  .loom-slot {
+    margin: 40px 0 0;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border: 1px dashed var(--line-strong);
+    border-radius: 5px;
+    background:
+      radial-gradient(120% 120% at 50% 40%, rgba(14,107,90,0.05), transparent 70%),
+      var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+  }
+  .play {
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: var(--pine);
+    display: grid; place-items: center;
+    box-shadow: 0 6px 20px rgba(10,82,69,0.28);
+  }
+  .play::before {
+    content: "";
+    width: 0; height: 0;
+    border-left: 17px solid #fff;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    margin-left: 4px;
+  }
+  .loom-slot .cap {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--slate);
+    letter-spacing: 0.02em;
+  }
+  .disclosure {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--slate);
+    max-width: 62ch;
+    margin: 14px 0 0;
+    padding-left: 14px;
+    border-left: 2px solid var(--line-strong);
+  }
+  .disclosure b { color: var(--ink); font-weight: 600; }
+  .video-embed { margin:40px auto 0; width:100%; max-width:340px; aspect-ratio:9/16; border-radius:8px; overflow:hidden; background:#000; box-shadow:0 8px 30px rgba(20,24,27,0.18); }
+  .video-embed iframe { width:100%; height:100%; display:block; border:0; }
+
+  /* ---- sections ---- */
+  section { margin-top: 68px; }
+  h2 {
+    font-size: 14px;
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin: 0 0 22px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  h2 .idx { color: var(--pine); margin-right: 12px; }
+
+  p { margin: 0 0 18px; max-width: 64ch; }
+
+  /* ---- who-for list ---- */
+  .signs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .signs li {
+    position: relative;
+    padding: 12px 0 12px 34px;
+    border-bottom: 1px solid var(--line);
+    max-width: 64ch;
+  }
+  .signs li:last-child { border-bottom: 0; }
+  .signs li::before {
+    content: "×";
+    position: absolute; left: 4px; top: 11px;
+    font-family: var(--mono);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--brick);
+    line-height: 1.4;
+  }
+
+  /* ---- proof / diff block ---- */
+  .proof { display: grid; gap: 18px; }
+  .pcard {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 20px 22px;
+  }
+  .pcard .plabel {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--pine);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pcard .plabel::before {
+    content: "✓";
+    color: var(--pine);
+    font-weight: 700;
+  }
+  .pcard p { margin: 0; color: var(--ink); }
+  .pcard p .q { color: var(--slate); }
+
+  /* the one aesthetic risk: the struck correction */
+  .correction {
+    background: var(--ink);
+    color: #E8ECEA;
+    border-radius: 6px;
+    padding: 30px 26px;
+    margin: 6px 0 0;
+  }
+  .correction .num {
+    font-family: var(--mono);
+    font-size: clamp(30px, 6vw, 46px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    line-height: 1.1;
+  }
+  .correction .was {
+    color: #7C6B67;
+    text-decoration: line-through;
+    text-decoration-color: var(--brick);
+    text-decoration-thickness: 3px;
+  }
+  .correction .arrow { color: #55605C; font-size: 0.6em; }
+  .correction .is { color: #4FD1B4; }
+  .correction .cap {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    color: #AAB4B0;
+    margin: 16px 0 0;
+    max-width: 58ch;
+  }
+  .correction .cap b { color: #E8ECEA; font-weight: 600; }
+
+  /* ---- tiers spec sheet ---- */
+  .tiers { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 5px; overflow: hidden; background: var(--surface); }
+  .tier {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    padding: 24px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tier:last-child { border-bottom: 0; }
+  .tier.featured { background: rgba(14,107,90,0.045); }
+  .tier .head { }
+  .tier .tname {
+    font-size: 20px; font-weight: 700; letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .tier .price {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--pine-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .tier .turn {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--slate);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .tier .desc { color: var(--ink); font-size: 16px; line-height: 1.55; align-self: center; }
+  @media (max-width: 560px) {
+    .tier { grid-template-columns: 1fr; gap: 10px; }
+  }
+
+  .terms {
+    font-size: 15.5px;
+    color: var(--slate);
+    border-left: 2px solid var(--pine);
+    padding: 4px 0 4px 18px;
+    margin-top: 22px;
+    max-width: 62ch;
+  }
+  .terms b { color: var(--ink); font-weight: 600; }
+
+  /* ---- CTA ---- */
+  .cta {
+    margin-top: 40px;
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-size: 16px; font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: transform .12s ease, background .12s ease;
+  }
+  .btn-primary { background: var(--pine); color: #fff; }
+  .btn-primary:hover { background: var(--pine-deep); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
+  .btn .amt { font-family: var(--mono); opacity: 0.85; }
+  .cta .or { font-family: var(--mono); font-size: 13px; color: var(--slate); }
+
+  /* ---- footer ---- */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--slate);
+  }
+  footer .name { color: var(--ink); font-weight: 600; }
+  footer a { color: var(--pine-deep); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--pine); outline-offset: 3px; }
+
+  /* ---- reveal ---- */
+  .reveal { opacity: 0; transform: translateY(14px); }
+  .reveal.in { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
+    .btn { transition: none; }
+  }
+</style>
+
+<div class="page">
+
+
+  <div class="wrap">
+
+    <p class="eyebrow">Claude Code &amp; AI Automation Audit</p>
+
+    <h1>Make your AI-generated code safe, cheap, and repeatable.</h1>
+
+    <p class="lede"><strong>Agents write the code. I build the gates that decide what reaches prod.</strong></p>
+    <p class="lede quiet">I run production AI systems every day — a live financial-trading platform, an eval-gated LLM pipeline, and a fleet of autonomous coding agents with guardrails. I'll audit how your team ships AI-generated code and either hand you the fix list or install the guardrails myself.</p>
+
+    <div class="receipts" role="list" aria-label="Track record">
+      <div class="receipt" role="listitem"><div class="n">1,750+</div><div class="k">Claude Code sessions</div></div>
+      <div class="receipt" role="listitem"><div class="n">25</div><div class="k">projects shipped</div></div>
+      <div class="receipt" role="listitem"><div class="n">24/7</div><div class="k">agents in production</div></div>
+      <div class="receipt" role="listitem"><div class="n">Gold</div><div class="k">WorldQuant BRAIN tier</div></div>
+    </div>
+
+    <div class="video-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/a_gePRv3YOA" title="This Whole Video Is AI. I Still Wouldn't Let It Ship My Code." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <p class="disclosure"><b>Yes, that walkthrough is delivered by an AI avatar of me.</b> I build these systems, so of course my intro is one — rendered by my own pipeline. Knowing exactly where to trust AI and where not to is the entire point of the audit.</p>
+
+    <section class="reveal">
+      <h2><span class="idx">01</span>Who this is for</h2>
+      <p>You've adopted Cursor, Claude Code, or Copilot, and the speed came with a mess you can't fully see:</p>
+      <ul class="signs">
+        <li>AI-generated code reaching prod with no tests, exposed secrets, or missing auth.</li>
+        <li>Every engineer using AI their own way — no shared setup, no guardrails, nothing repeatable.</li>
+        <li>A half-built "agent" that works in the demo and breaks the moment it meets reality.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2><span class="idx">02</span>Why me</h2>
+      <p>The thing I'm actually good at isn't prompting. It's not trusting the output. That instinct came from a specific failure:</p>
+
+      <div class="correction">
+        <div class="num"><span class="was">100%</span><span class="arrow">was really</span><span class="is">22.5%</span></div>
+        <p class="cap">I once shipped an AI pipeline that reported perfect accuracy. The model was grading itself against its own answer key. I caught it, published the six ways it failed, and rebuilt everything around one rule: <b>the model can detect and draft, but it never certifies its own work.</b> That rule is what I install for teams.</p>
+      </div>
+
+      <div class="proof" style="margin-top:26px;">
+        <div class="pcard">
+          <div class="plabel">A gate that doesn't trust the agent</div>
+          <p>A validator grades each work product pass/fail, but a separate deterministic script re-derives the verdict from the raw logs. A "pass" with a leaking log still fails. <span class="q">The agent can't talk its way past a grep.</span></p>
+        </div>
+        <div class="pcard">
+          <div class="plabel">Guardrails it can't override</div>
+          <p>My coding agent physically cannot leak a secret, blanket-add untracked files, or run destructive shell. It can read my brokerage account; it cannot move money. <span class="q">Safe autonomy is the whole point.</span></p>
+        </div>
+        <div class="pcard">
+          <div class="plabel">Autonomy with a human gate</div>
+          <p>The agents run 24/7 on a cloud VM — cheap model for grinding, the expensive one only for judgment. When one hits something irreversible, it parks and emails me. <span class="q">I approve from my phone.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2><span class="idx">03</span>What you get</h2>
+      <div class="tiers">
+        <div class="tier featured">
+          <div class="head">
+            <div class="tname">Audit</div>
+            <div class="price">$499</div>
+            <div class="turn">5 business days</div>
+          </div>
+          <div class="desc">An 8–12 page risk map of your AI-generated codebase — secrets, auth, injection, test gaps — plus your top 10 automation opportunities ranked by ROI, and a video walkthrough.</div>
+        </div>
+        <div class="tier">
+          <div class="head">
+            <div class="tname">Setup</div>
+            <div class="price">$999</div>
+            <div class="turn">7–10 days</div>
+          </div>
+          <div class="desc">Everything in the Audit, plus I install it: your <code>CLAUDE.md</code>, safety hooks (secret-scan, destructive-shell block), 1–2 MCP servers, and a repeatable team config, in your repo.</div>
+        </div>
+        <div class="tier">
+          <div class="head">
+            <div class="tname">Build</div>
+            <div class="price">$3,000+</div>
+            <div class="turn">2–3 weeks</div>
+          </div>
+          <div class="desc">One working autonomous workflow end-to-end — a real recurring job an agent takes over — with tests, guardrails, and a runbook. Scoped per job.</div>
+        </div>
+      </div>
+      <p class="terms"><b>50% upfront, 50% on delivery.</b> Fixed price, fixed scope. If the Audit doesn't surface at least 3 fixable risks or 3 real automation wins, you don't pay the balance.</p>
+    </section>
+
+    <section class="reveal">
+      <h2><span class="idx">04</span>Start</h2>
+      <p>Pick a tier and pay 50% to kick off, or take 15 minutes first to see if it's a fit.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://calendly.com/treum/demo">Book a 15-min call</a>
+        <a class="btn btn-ghost" href="mailto:srijanaryay@gmail.com?subject=Claude%20Code%20Audit">Start the Audit <span class="amt">— $499</span></a>
+        <span class="or">or email me your stack</span>
+      </div>
+    </section>
+
+    <footer>
+      <span class="name">Srijan Arya</span>
+      <span>AI-native engineer · WorldQuant BRAIN Gold</span>
+      <a href="mailto:srijanaryay@gmail.com">srijanaryay@gmail.com</a>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(function (e) { e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
