@@ -1,6 +1,6 @@
-# Repo health — 2026-07-13
-- last commit: ac5aa0a 7 days ago — ci: add node-ci workflow (lint + vitest + build gate on push/PR to main)
-- commits last 30d: 8
-- README last touched: 46d ago
+# Repo health — 2026-07-20
+- last commit: 8aad61c 7 days ago — health: weekly repo report [skip ci]
+- commits last 30d: 9
+- README last touched: 53d ago
 - TODO/FIXME: 0
 - tests: ✓ 
