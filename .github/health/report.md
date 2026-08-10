@@ -1,6 +1,6 @@
-# Repo health — 2026-08-03
-- last commit: e75bde1 7 days ago — health: weekly repo report [skip ci]
-- commits last 30d: 11
-- README last touched: 67d ago ⚠ stale
+# Repo health — 2026-08-10
+- last commit: 77991b7 7 days ago — health: weekly repo report [skip ci]
+- commits last 30d: 4
+- README last touched: 74d ago ⚠ stale
 - TODO/FIXME: 0
 - tests: ✓ 
