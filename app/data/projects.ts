@@ -25,18 +25,6 @@ export const PROJECTS: Project[] = [
       { label: "Product page", href: "https://treumalgotech.in" },
     ],
     hero: true,
-    testimonials: [
-      {
-        status: "received",
-        quote:
-          "Srijan was professional throughout the project and delivered the work according to the brief. They followed instructions well.",
-        author: "Upwork client",
-        role: "Stock Market Visualizations & API Integration project",
-        source: "upwork",
-        link: "https://www.upwork.com/freelancers/~013744500dd78c9569",
-        date: "2026-02-05",
-      },
-    ],
   },
   {
     id: "earningsiq",

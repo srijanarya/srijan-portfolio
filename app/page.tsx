@@ -124,7 +124,7 @@ export default function Home() {
           <div id="contact" className="animate-fade-up stagger-6 scroll-mt-24">
             <SectionMarker label="external inputs" className="mb-3" />
             <p className="text-ink-mute text-sm mb-4 max-w-[60ch]">
-              Reach me directly. All four channels read.
+              Reach me directly. Every channel is read.
             </p>
             <div className="grid gap-px bg-line border border-line text-sm max-w-2xl">
               <EvalRow
@@ -161,19 +161,6 @@ export default function Home() {
                     className="text-confidence hover:underline underline-offset-4 break-all"
                   >
                     linkedin.com/in/srijan-arya-a0a50693 ↗
-                  </a>
-                }
-              />
-              <EvalRow
-                label="upwork"
-                value={
-                  <a
-                    href="https://www.upwork.com/freelancers/~013744500dd78c9569"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-confidence hover:underline underline-offset-4 break-all"
-                  >
-                    upwork.com/freelancers/~013744500dd78c9569 ↗
                   </a>
                 }
               />
