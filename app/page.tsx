@@ -24,7 +24,7 @@ const RUN = {
   confidenceLabel: "HIGH" as const,
   hallucinationsCaught: 1,
   sourcesVerified: 4,
-  lastEval: "2026-05-27T18:00:00+05:30",
+  lastEval: "2026-09-07T21:30:00+05:30",
   // The locked verdict line — from the canonical STAR+R pitch in the
   // AI-Native Engineer identity memory file. This is the eval thesis.
   verdict:
@@ -56,9 +56,9 @@ export default function Home() {
               Srijan Arya<span className="text-confidence animate-cursor">_</span>
             </h1>
             <p className="mt-4 text-xl sm:text-2xl text-ink-mute">
-              AI-Native Senior Engineer
+              AI-native builder: spec → agents → eval gate
               <span className="mx-3 text-ink-faint" aria-hidden>·</span>
-              <span>Mumbai → remote</span>
+              <span>Mumbai · open to Hyderabad / remote</span>
             </p>
           </div>
 
@@ -113,7 +113,7 @@ export default function Home() {
           {/* SELECTED RESPONSES — 3 hero project cards */}
           <div className="animate-fade-up stagger-5">
             <SectionMarker label="selected responses" className="mb-6" />
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {projects.map((p) => (
                 <EvalCard key={p.id} project={p} />
               ))}
@@ -211,7 +211,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
               <span>eval_run #{RUN.id}</span>
               <span className="text-ink-mute">
-                · srijan-portfolio · IST 2026-05-27 · provenance: github/srijanarya
+                · srijan-portfolio · IST 2026-09-07 · provenance: github/srijanarya
               </span>
             </div>
           </footer>

@@ -13,12 +13,12 @@ export const PROJECTS: Project[] = [
     confidence: 0.974,
     confidenceLabel: "HIGH",
     metrics: [
-      { value: "377",   count: 377,    label: "broker-feed failovers in one trading session — zero downtime, zero missed trades", source: "cv.md:18" },
-      { value: "400K+", count: 400000, suffix: "+", label: "lines of production code shipped solo since 2023", source: "cv.md:17" },
-      { value: "2023",  label: "running live on NSE since", source: "cv.md:28" },
+      { value: "0",     count: 0,      label: "missed trades through repeated broker-feed failovers in a single session — zero downtime", source: "cv.md:18" },
+      { value: "400K+", count: 400000, suffix: "+", label: "lines of production code shipped solo over three years", source: "cv.md:17" },
+      { value: "LIVE",  label: "running in production on the NSE", source: "cv.md:28" },
     ],
     blurb:
-      "Live NSE options platform built solo over three years. During one full session where the primary data feed went down all day, the reliability layer auto-switched to a backup 377 times with no downtime and no missed trades.",
+      "Live NSE options platform built solo over three years. During one full session where the primary data feed went down all day, the reliability layer failed over to a backup feed on every drop, repeatedly, with no downtime and no missed trades.",
     stack: ["Python", "FastAPI", "PostgreSQL", "React", "Zerodha Kite", "AWS"],
     links: [
       { label: "Public architecture walkthrough", href: "https://github.com/srijanarya/aksh-backtesting-trading" },
@@ -60,6 +60,23 @@ export const PROJECTS: Project[] = [
         "Previously reported 100% extraction accuracy. The validation methodology was circular — checking the LLM's output against the same source it had extracted from. Caught it, rebuilt validation against Screener.in independent ground truth, found real accuracy was 22.5% revenue / 15.4% PAT / 0% EPS. Wrote systematic error analysis. Rearchitected the system.",
       decisionLink: "/decisions#honest-accuracy",
     },
+  },
+  {
+    id: "mcp-servers",
+    name: "MCP servers + fail-closed hook",
+    subtitle: "Agents inside a permission boundary, verified live",
+    status: "shipped",
+    confidence: 0.95,
+    confidenceLabel: "HIGH",
+    metrics: [
+      { value: "4",    count: 4,  label: "MCP servers on the official SDK", source: "cv.md" },
+      { value: "26+",  count: 26, suffix: "+", label: "tools exposed to agents", source: "cv.md" },
+      { value: "0",    count: 0,  label: "irreversible trade mutations an agent can reach past the PreToolUse hook", source: "cv.md" },
+    ],
+    blurb:
+      "Four MCP servers on the official SDK. A PreToolUse hook fails closed on irreversible Kite trade mutators while allowing reads, so an agent can inspect a live brokerage account but never place, modify or cancel an order. Verified against the live account.",
+    stack: ["Python", "official MCP SDK", "Claude Code hooks", "Zerodha Kite"],
+    hero: true,
   },
   {
     id: "bmad-leadgen",
