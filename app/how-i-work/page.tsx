@@ -18,7 +18,7 @@ import { CornerBracket } from "@/components/eval/CornerBracket";
 export const metadata: Metadata = {
   title: "How I Work",
   description:
-    "Plan → Decompose → Dispatch AI → Review → Ship. The AI-Native workflow that produced 400K+ LOC solo across two production AI systems.",
+    "Plan → Decompose → Dispatch AI → Review → Ship. The AI-Native workflow that produced 400K+ LOC solo across three production AI systems.",
 };
 
 const codeReviewLog = [
@@ -107,7 +107,7 @@ export default function HowIWorkPage() {
               </div>
               <h3 className="text-ink text-xl mb-3">How do we know it&apos;s working?</h3>
               <p className="text-ink-mute leading-relaxed">
-                Telemetry has to be honest. If the metric says &ldquo;99.7% accurate&rdquo; but the methodology that produced that number is circular, the metric is worse than no metric — it&apos;s actively misleading. The full story lives at{" "}
+                Telemetry has to be honest. If the metric says &ldquo;100% accurate&rdquo; but the methodology that produced that number is circular, the metric is worse than no metric — it&apos;s actively misleading. The full story lives at{" "}
                 <Link href="/decisions#honest-accuracy" className="text-confidence hover:underline underline-offset-4">
                   /decisions
                 </Link>
@@ -141,7 +141,7 @@ export default function HowIWorkPage() {
         <div className="animate-fade-up mb-12 max-w-[72ch]">
           <SectionMarker label="what i'm trying to internalize" className="mb-4" />
           <p className="text-ink leading-relaxed">
-            Three years solo, two production systems running, one BRAIN top-5% ranking. The thing I&apos;m still working on is the <em>human</em> side — moving from &ldquo;every architectural call is mine&rdquo; to &ldquo;every architectural call is the team&apos;s, and mine to defend or revise.&rdquo; That&apos;s the next stretch.
+            Three years solo, three production systems running, one BRAIN top-5% ranking. The thing I&apos;m still working on is the <em>human</em> side — moving from &ldquo;every architectural call is mine&rdquo; to &ldquo;every architectural call is the team&apos;s, and mine to defend or revise.&rdquo; That&apos;s the next stretch.
           </p>
         </div>
 

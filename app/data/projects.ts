@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
     confidenceLabel: "HIGH",
     metrics: [
       { value: "Top 5%", count: 5, suffix: "%", label: "of 286,757 participants globally", source: "cv.md:16" },
-      { value: "2.08",   count: 2.08, precision: 2, label: "best alpha Sharpe ratio", source: "cv.md:16" },
+      { value: "2.73",   count: 2.73, precision: 2, label: "best active in-sample alpha Sharpe ratio", source: "cv.md:23" },
       { value: "12",     count: 12, label: "alphas in active portfolio across 5 datasets", source: "cv.md:21" },
     ],
     blurb:
